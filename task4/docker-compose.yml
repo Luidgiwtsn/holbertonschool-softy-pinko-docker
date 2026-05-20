@@ -1,0 +1,26 @@
+version: '3.8' # Version du format de fichier Docker Compose
+
+services:
+  # --- CONFIGURATION DU BACK-END ---
+  back-end:
+    # Indique à Docker où trouver le Dockerfile pour construire l'image
+    build:
+      context: ./back-end      # Le dossier racine du contexte de build pour le back-end
+      dockerfile: Dockerfile   # Le nom du fichier Dockerfile à utiliser
+    # Nom de l'image locale qui sera générée
+    image: softy-pinko-back-end:task4
+    # Redirection de ports : HOSTPORT:CONTAINERPORT
+    ports:
+      - "5252:5252" # Rend l'API Flask accessible sur le port 5252 de votre machine
+
+  # --- CONFIGURATION DU FRONT-END ---
+  front-end:
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    image: softy-pinko-front-end:task4
+    ports:
+      - "9000:9000" # Rend le site Nginx accessible sur le port 9000 de votre machine
+    # Indique une dépendance : le front-end attend que le conteneur back-end ait démarré
+    depends_on:
+      - back-end
