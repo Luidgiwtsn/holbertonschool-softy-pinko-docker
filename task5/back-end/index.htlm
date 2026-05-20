@@ -1,0 +1,23 @@
+<div class="offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 col-md-12 col-sm-12">
+    <h1 id="dynamic-content"></h1>
+    
+    <h1>We provide the best <strong>strategy</strong><br>to grow up your<strong>business</strong></h1>
+    <a href="#features" class="main-button-slider">Discover More</a>
+</div>
+<script>
+    // $(function() {...}) s'assure que le script s'exécute une fois que la page HTML est complètement chargée
+    $(function() {
+        // Appelle la méthode AJAX de jQuery pour envoyer une requête HTTP
+        $.ajax({
+            type: "GET", // Spécifie la méthode HTTP (récupération de données)
+            url: "http://localhost:5252/api/hello", // Adresse de l'API Flask s'exécutant sur le port 5252
+            success: function(data) { // Fonction qui s'exécute si la requête réussit
+                console.log(data); // Affiche la réponse dans la console du navigateur pour le débogage
+                // Sélectionne l'élément HTML avec l'ID 'dynamic-content' et remplace son texte par les données reçues
+                $('#dynamic-content').text(data); 
+            }
+        });
+    });
+</script>
+</body>
+</html>
